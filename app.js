@@ -4,7 +4,8 @@ new Vue({
         playerHealth: 100,
         monsterHealth: 100,
         gameIsRunning: false,
-        turns: []
+        turns: [],
+        gameEndedStatus: '',
     },
     methods: {
         startGame: function () {
@@ -12,6 +13,7 @@ new Vue({
             this.playerHealth = 100;
             this.monsterHealth = 100;
             this.turns = [];
+            this.gameEndedStatus = '';
         },
         attack: function () {
             var min_damage_monster = 3;
@@ -53,7 +55,7 @@ new Vue({
         },
         playerAttacks: function(min,max) {
             var damage = this.calculateDamage(min, max);
-            this.monsterHealth -= this.calculateDamage(min, max);
+            this.monsterHealth -= damage;
             this.updateTurns(damage);
         },
         monsterAttacks: function(){
@@ -86,28 +88,23 @@ new Vue({
             });
         },
         checkWin: function() {
+            var text = '';
+
             if(this.monsterHealth <= 0 && this.playerHealth <= 0){
-                if(confirm('Wow its a draw! New Game?')){
-                    this.startGame();
-                }else{
-                    this.monsterHealth = 0;
-                    this.playerHealth = 0;
-                    this.gameIsRunning = false;
-                }
+                this.monsterHealth = 0;
+                this.playerHealth = 0;
+                text = 'Wow its a draw! New Game?';
             }else if(this.monsterHealth <= 0) {
-                if(confirm('You won! New Game?')){
-                    this.startGame();
-                }else{
-                    this.monsterHealth = 0;
-                    this.gameIsRunning = false;
-                }
+                this.monsterHealth = 0;
+                text = 'You won! New Game?';
             }else if(this.playerHealth <= 0) {
-                if(confirm('You lose! New Game?')){
-                    this.startGame();
-                }else{
-                    this.playerHealth = 0;
-                    this.gameIsRunning = false;
-                }
+                this.playerHealth = 0;
+                text = 'You lose! New Game?';
+            }
+
+            if(text != '') {
+                this.gameEndedStatus = text;
+                this.gameIsRunning = false;
             }
         }
     }

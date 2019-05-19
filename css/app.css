@@ -10,7 +10,7 @@
     transition: width 500ms;
 }
 
-.controls, .log {
+.controls, .log, .game-end {
     margin-top: 30px;
     text-align: center;
     padding: 10px;
@@ -23,6 +23,14 @@
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 22px;
+}
+
+.game-end ul {
+    list-style: none;
+    font-weight: bold;
+    color: red;
+    background-color: #ececa4;
+    text-transform: uppercase;
 }
 
 .log ul {
