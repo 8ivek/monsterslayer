@@ -93,7 +93,7 @@ new Vue({
             if(this.monsterHealth <= 0 && this.playerHealth <= 0){
                 this.monsterHealth = 0;
                 this.playerHealth = 0;
-                text = 'Wow its a draw! New Game?';
+                text = 'Wow its a draw! You are the REAL winner!!! ';
             }else if(this.monsterHealth <= 0) {
                 this.monsterHealth = 0;
                 text = 'You won! New Game?';
